@@ -1,0 +1,14 @@
+{
+  "name": "teaboom-product-card",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Responsive Teaboom product card in HTML, CSS and vanilla JavaScript",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "check": "node --check script.js && node --check scripts/serve.mjs && node --check tests/browser-checks.mjs",
+    "test": "node tests/browser-checks.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.0"
+  }
+}
