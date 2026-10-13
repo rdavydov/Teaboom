@@ -85,6 +85,10 @@ try {
       await page.locator(`.package:has(input[value="${variant.weight}"])`).click();
       await expectVariant(page, variant);
       await expectLayout(page, size.width);
+      // Wait for CSS transitions before comparing the selected and unselected styles.
+      await page.locator(".package span").evaluateAll((elements) =>
+        Promise.all(elements.flatMap((element) => element.getAnimations().map((animation) => animation.finished))),
+      );
       const selectedStyle = await page.locator('input:checked + span').evaluate((element) => getComputedStyle(element).backgroundColor);
       const unselectedStyle = await page.locator('input:not(:checked) + span').first().evaluate((element) => getComputedStyle(element).backgroundColor);
       assert.notEqual(selectedStyle, unselectedStyle, "Selected package must be visually distinct");
